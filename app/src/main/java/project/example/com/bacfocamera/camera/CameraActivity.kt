@@ -1,4 +1,4 @@
-package project.example.com.bacfocamera
+package project.example.com.bacfocamera.camera
 
 
 import android.annotation.SuppressLint
@@ -11,13 +11,14 @@ import android.os.*
 import android.os.Environment.getExternalStoragePublicDirectory
 import android.support.v7.app.AppCompatActivity
 import android.support.annotation.RequiresApi
-import android.support.v4.view.ViewCompat
 import android.util.Log
 import android.util.SparseIntArray
 import android.view.Surface
 import android.view.TextureView
 import android.view.View
 import kotlinx.android.synthetic.main.activity_camera.*
+import project.example.com.bacfocamera.alertDialog.AlertDialogBox
+import project.example.com.bacfocamera.R
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -122,7 +123,8 @@ class CameraActivity : AppCompatActivity() {
         try {
             backgroundThread.join()
         } catch (e: Exception) {
-            AlertDialogBox().createBuilder(this@CameraActivity, "thread Exception", "" + e.toString(), "ok")
+            AlertDialogBox()
+                .createBuilder(this@CameraActivity, "thread Exception", "" + e.toString(), "ok")
         }
     }
 
@@ -292,7 +294,8 @@ class CameraActivity : AppCompatActivity() {
             return if (wasCreated) {
                 true
             } else {
-                AlertDialogBox().createBuilder(this, "Storage Error", "Directory Making Failed", "ok")
+                AlertDialogBox()
+                    .createBuilder(this, "Storage Error", "Directory Making Failed", "ok")
                 return false
 
             }
@@ -502,7 +505,8 @@ class CameraActivity : AppCompatActivity() {
             try {
                 takePictureFromCamera(textureView1.surfaceTexture,0,backgroundHandler,cameraDevice)
             } catch (e: Exception) {
-                AlertDialogBox().createBuilder(this@CameraActivity, "Error", "" + e.message, "okk")
+                AlertDialogBox()
+                    .createBuilder(this@CameraActivity, "Error", "" + e.message, "okk")
 
             }
         }
@@ -607,7 +611,8 @@ class CameraActivity : AppCompatActivity() {
                                }
                                connectCamera(CameraCharacteristics.LENS_FACING_FRONT, deviceCallback2, backgroundHandler2)
                            } catch (e: Exception) {
-                               AlertDialogBox().createBuilder(this@CameraActivity, "Capture", "" + e.toString(), "ok")
+                               AlertDialogBox()
+                                   .createBuilder(this@CameraActivity, "Capture", "" + e.toString(), "ok")
                            }
                        }
                        var image: Image? = null
@@ -661,14 +666,16 @@ class CameraActivity : AppCompatActivity() {
                     failure: CaptureFailure
                 ) {
                     super.onCaptureFailed(session, request, failure)
-                    AlertDialogBox().createBuilder(this@CameraActivity, "Bitmap", "failed", "ok")
+                    AlertDialogBox()
+                        .createBuilder(this@CameraActivity, "Bitmap", "failed", "ok")
                 }
             }
 
             cameraDevice.createCaptureSession(outputSurface, object : CameraCaptureSession.StateCallback() {
                 override fun onConfigureFailed(p0: CameraCaptureSession) {
 
-                    AlertDialogBox().createBuilder(this@CameraActivity, "Bitmap", "" + p0.toString(), "ok")
+                    AlertDialogBox()
+                        .createBuilder(this@CameraActivity, "Bitmap", "" + p0.toString(), "ok")
 
                 }
 
@@ -684,7 +691,8 @@ class CameraActivity : AppCompatActivity() {
 
             }, backgroundHandler)
         } catch (E: java.lang.Exception) {
-            AlertDialogBox().createBuilder(this@CameraActivity, "ERROR on Image Capturing", "" + E.message.toString(), "ok")
+            AlertDialogBox()
+                .createBuilder(this@CameraActivity, "ERROR on Image Capturing", "" + E.message.toString(), "ok")
 
 
         }

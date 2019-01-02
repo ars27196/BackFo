@@ -10,6 +10,8 @@ import android.os.Bundle
 import android.support.v4.content.PermissionChecker.PERMISSION_DENIED
 import android.support.v4.content.PermissionChecker.PERMISSION_GRANTED
 import kotlinx.android.synthetic.main.activity_home.*
+import project.example.com.bacfocamera.alertDialog.AlertDialogBox
+import project.example.com.bacfocamera.camera.CameraActivity
 import project.example.com.bacfocamera.gallery.*
 class HomeActivity : AppCompatActivity() {
     var camera=false
@@ -71,11 +73,14 @@ class HomeActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if(requestCode==1){
             if(grantResults[0]==PERMISSION_DENIED && grantResults[1]== PERMISSION_DENIED){
-                AlertDialogBox().createBuilder(this,"Permission","Camera and Storage permission denied","ok")
+                AlertDialogBox()
+                    .createBuilder(this,"Permission","Camera and Storage permission denied","ok")
             }else if(grantResults[1]== PERMISSION_DENIED){
-                AlertDialogBox().createBuilder(this,"Permission","Storage permission denied","ok")
+                AlertDialogBox()
+                    .createBuilder(this,"Permission","Storage permission denied","ok")
             }else if(grantResults[0]== PERMISSION_DENIED){
-                AlertDialogBox().createBuilder(this,"Permission","Camera permission denied","ok")
+                AlertDialogBox()
+                    .createBuilder(this,"Permission","Camera permission denied","ok")
             }else if(grantResults[0]== PERMISSION_GRANTED && grantResults[1]== PERMISSION_GRANTED){
                 if(camera){
                     val intent = Intent(this@HomeActivity, CameraActivity::class.java)

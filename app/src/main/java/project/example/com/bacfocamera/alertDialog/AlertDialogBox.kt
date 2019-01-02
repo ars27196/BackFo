@@ -1,4 +1,4 @@
-package project.example.com.bacfocamera
+package project.example.com.bacfocamera.alertDialog
 
 import android.content.Context
 import android.content.DialogInterface
